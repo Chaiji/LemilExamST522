@@ -1,0 +1,18 @@
+{
+    "contents" : "#' @export\n#' @return returns the Chi-squared goodness of fit value, calculated using Pearson's Chi-squared test\n#' @title Chi-squared Goodness of Fit test\n#' @usage chi.test(x,p)\n#'\n#' @keywords distribution chi squared pearson goodness fit value\n#'\n#' @description This function takes 1 or 2 arguments to calculate the chi squared goodness of fit value from these arguments.\n#'\n#' @param x is a categorical variable vector of numbers, counting number of each incident.\n#' @param p is an optional vector of probabilities. If unused, replaced by a uniformly distributed vector of probabilities.\n#' @author Nguyen Khanh Le Ho & Emil H. Andersen \\cr\n#' Department of Mathematics and Computer Science (IMADA) \\cr\n#' University of Southern Denmark, Denmark \\cr\n#' \\email{emila14@student.sdu.dk} \\cr\n#' \\email{ngho14@student.sdu.dk} \\cr\n#' @examples\n#' chi.test(c(1,2,3),c(0.25,0.6,0.15))\n\nchi.test <- function(x,p){\n  #------------------------------------Error Handler:--------------------------------------#\n  # ---------------------------------------------------------------------------------------#\n  # 'x' must be a vector of positive numbers                                               #\n  # 'p' must be a vector of probabilities. If not chosen, program decides uniform          #\n  #----------------------------------------------------------------------------------------#\n  #First we check if x is a vector of numbers\n  if(!is.vector(x) || is.matrix(x) || is.list(x) || !is.numeric(x)){\n    stop(\"'x' has to be a vector of numbers.(Non list, non matrix)\")\n  }\n  if(missing(p)){ #If p is not used, probability is uniform\n    p <- rep((1/length(x)),length(x))\n  } else if(!is.vector(p) || is.matrix(p) || is.list(p) || !is.numeric(p)){\n    stop(\"'p' has to be a vector of numbers.(Non list, non matrix)\") #If p exist, check it is a vector of numbers\n  } else if(length(p) != length(x)){\n    stop(\"'p' and 'x' has to be of the same length\")\n  }\n  if(sum(p) != 1){ #Warn the user if the total probability does not equal to 1.\n    warning(\"Sum of p is not equal to 1, this may cause incorrect calculations.\")\n  }\n  if(length(p[p<0])>0){ #Warn the user if they added negative probabilities\n    stop(\"p contains negative values, this will cause incorrect calculations.\")\n  }\n  if(length(x[x<0])>0){ #Warn the user if they added negative values to x\n    stop(\"x contains negative values, this will cause incorrect calculations.\")\n  }\n  #---------------------------------------End Error Handler---------------------------------#\n  n <- sum(x) #We need to know how many there are in total for Pearson's Chi-squared statistic\n  return(sum(((x - n*p)^2)/(n*p))) #Formula to calculate Pearson's Chi-squared statistic\n}\n",
+    "created" : 1465026326971.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "705864026",
+    "id" : "CBC28172",
+    "lastKnownWriteTime" : 1465027746,
+    "path" : "C:/Users/Emil/Dropbox/Universitet/ST522/FinalProjectCombined/Package/LemilExamST522/R/chi.test.R",
+    "project_path" : "R/chi.test.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
