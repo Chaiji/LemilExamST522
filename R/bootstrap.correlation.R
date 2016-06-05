@@ -31,9 +31,6 @@ bootstrap.correlation <- function(n = 200, x , y, plot = FALSE){
   # 'plot' must be a boolean valued.                                                       #
   #----------------------------------------------------------------------------------------#
 
-  xIsVector <- TRUE #Assume that x is a vector until it is not
-  yIsVector <- TRUE #same for y
-
   if(is.matrix(n) || is.list(n) || length(n)!=1){ #Check that n is a single value
     stop("'n' has to be a positive integer; length=1, non-list, non-matrix")
   } else if(!is.numeric(n)){ #checks if n is a number
@@ -44,10 +41,8 @@ bootstrap.correlation <- function(n = 200, x , y, plot = FALSE){
   if(is.list(y) || is.list(x) || !is.numeric(x) || !is.numeric(y) || is.matrix(x+y) || !is.vector(x+y)   ){
     stop(" The given data 'x' or 'y' must be numerical vectors.")
   }
-  if(xIsVector == TRUE && yIsVector == TRUE){ #If either x or y isnt a vector, we cant check this
-    if(length(x) != length(y)){ #We check if x and y has same length
+  if(length(x) != length(y)){ #We check if x and y has same length
       stop("'x' and 'y' has to be of the same length.")
-    }
   }
   if(!is.logical(plot)|| length(plot) != 1){
     stop("'plot' must be a single logical value.")
