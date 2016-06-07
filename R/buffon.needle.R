@@ -46,16 +46,8 @@ buffon.needle <- function(n = 10,l = 1,d = 1){
     stop("'d' has to be a positive number")
   }
   #---------------------------------------End Error Handler---------------------------------#
-  h = 0                                      #Start with 0 hits
-  for(i in 1:n){
-    U <- runif(3)                            #Need 3 random variables for x, y and angle respectively
-    x <- d + 4*d*U[1]                        #This makes some empty space around the playing field
-    y <- d + 4*d*U[2]                        #same as above
-    Y <- l * sin(2*pi*U[3])                  #Determines the "height" of needle
-    Y2 = y %% d + Y                          #Used for determining a hit or miss
-    if(Y2 >= d || Y2 <= 0){                  #If Y2 is within area 0<Y2<d, then needle is between 2 parallel lines, but not hitting any
-      h = h + 1                              #If Y2 hits a parallel line, count it
-    }
-  }
-  return((2*l*n)/(d*h))                      #Finally, return the estimated pi
+  U <- matrix(runif(n*2),nrow=n,ncol=2) #We need 2 random variables for every needle. We throw n needles.
+  #Calling the runif function as few times as possible appears to minimize simulation time.
+  return((2*l*n)/(d*sum(U[,1]*d < l*sin(U[,2]*(pi/2))))) #Number of hits are calculated directly in the return.
+  #U[,1] contains n random numbers. U[,2] contains n random numbers.
 }

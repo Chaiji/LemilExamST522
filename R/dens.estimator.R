@@ -57,7 +57,7 @@ dens.estimator <- function(x,d,h,method="naive"){
   f <- rep(0,length(d))
   if(method == "naive"){ #Naive estimator
     if(missing(h)){ #If h not given, but method is naive.
-      h <- diff(range(x)/(1+log2(n))) #h is chosen based on Sturges method of choosing bandwidth. Ceiling the denominator??????
+      h <- diff(range(x)/(1+log2(n))) #h is chosen based on Sturges method of choosing bandwidth.
     }
     w <- matrix(rep(0,length(x)*length(d)),nrow=length(d),ncol=length(x)) #Allows calculating multiple values for d simultaneously using a matrix
     for (j in 1:length(d)){ #We need to check a row of values for every value in d.
@@ -72,7 +72,7 @@ dens.estimator <- function(x,d,h,method="naive"){
     }
   } else if(method =="kernel"){
     if(missing(h)){ #If h not given, but method is kernel
-      h <- ((4*sd(x)^5)/(3*n))^(1/5) #h is chosen based on Silvermans suggestion for choosing bandwidth for Gaussian functions. Ceiling somewhere??????
+      h <- ((4*sd(x)^5)/(3*n))^(1/5) #h is chosen based on Silvermans suggestion for choosing bandwidth for Gaussian functions.
     }
     K <- matrix(rep(0,length(x)*length(d)),nrow=length(d),ncol=length(x))
     for(j in 1:length(d)){

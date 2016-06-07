@@ -1,0 +1,18 @@
+{
+    "contents" : "mc.discrete <- function(p,k,n){\n  #------------------------------------Error Handler:--------------------------------------------#\n  # ---------------------------------------------------------------------------------------------#\n  # x is a vector of numbers                                                                     #\n  # n is the number of points to be used for plotting the density function. default is 500       #\n  # method is a string that either contains \"naive\" or \"kernel\", defaults to \"naive\"             #\n  # from is a number for where to start plot. If none chosen, calculates based on sd(x)          #\n  # to is a number for where to end plot. If none chosen, calculates based on sd(x)              #\n  #----------------------------------------------------------------------------------------------#\n  #p is a matrix with ncol=nrow\n  if(is.list(p) || !is.numeric(p) || !is.matrix(p) || is.vector(p)){\n    stop(\" The given data 'x' must be a numerical vector.\")\n  }\n  if(is.matrix(k) || is.list(k) || length(k)!=1){ #Check that k is a single value\n    stop(\"'k' has to be a positive integer; length=1, non-list, non-matrix\")\n  } else if(!is.numeric(k)){ #checks if n is a number\n    stop(\"'k' has to be a positive integer\")\n  } else if(k < 1 || n != round(n) || k > dim(p)[2]){ #checks if k is a natural number inside the transition probability matrix\n    stop(\"'k' has to be a positive integer between 1 and the width/height of the transition probability matrix\")\n  }\n  if(is.matrix(n) || is.list(n) || length(n)!=1){ #Check that n is a single value\n    stop(\"'n' has to be a positive integer; length=1, non-list, non-matrix\")\n  } else if(!is.numeric(n)){ #checks if n is a number\n    stop(\"'n' has to be a positive integer\")\n  } else if(n < 1 || n != round(n)){ #checks if n is a natural number\n    stop(\"'n' has to be a positive integer\")\n  }\n  #---------------------------------------End Error Handler--------------------------------------#\n  width <- dim(p)[2]\n  road <- rep(0,n)\n  for(i in 1:n){\n    point <- FALSE\n    j <- 1\n    a <- runif(1)\n    while(point == FALSE){\n      if(a <= p[k,j]){\n        point = TRUE\n        road[i] = j\n        k = j\n      } else{\n        a <- a - p[k,j]\n        j <- j + 1\n      }\n    }\n  }\n  stationary <- rep(0,width)\n  for(i in 1:width){\n    stationary[i] = sum(road == i)/n\n  }\n  return(stationary)\n}\n\np <- matrix(c(0.2,0.3,0,0,0,0.4,0.7,0,0.5,0,0,0,0,0.7,0,0,0,0,0,0,0.5,0.9,0.25,0,0,0,0,0.1,0.5,0.4,0.1,0,0,0,0.25,0.2),nrow=6,ncol=6)\nk <- 3\nn <- 10000\n",
+    "created" : 1465306192290.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4061091266",
+    "id" : "DDAB335A",
+    "lastKnownWriteTime" : 1465307629,
+    "path" : "C:/Users/Emil/Dropbox/Universitet/ST522/FinalProjectCombined/GitHub/LemilExamST522/R/mc.discrete.R",
+    "project_path" : "R/mc.discrete.R",
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

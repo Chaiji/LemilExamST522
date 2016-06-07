@@ -1,0 +1,18 @@
+{
+    "contents" : "buffon.needle2 <- function(n,l,d){\n  U <- matrix(runif(n*2),nrow=n,ncol=2)\n  return((2*l*n)/(d*sum(U[,1]*d < l*sin(U[,2]*(pi/2)))))\n}\nY <- runif (n, 0, d)\nX <- runif (n,0, pi/2)\nReturn ((2*l*n)/(d*sum (y <x)))\n\nbuffon.sim <- function(n,d,l){\n  return((2*l*n)/(d*sum(runif(n,0,d) < l*sin(runif(n,0,pi/2)))))\n}\n\na <- c()\nfor(i in 1:10000){\n  a[i] <- buffon.needle2(3408,2.5,3)\n}",
+    "created" : 1465308073225.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "2490624773",
+    "id" : "9415BE1E",
+    "lastKnownWriteTime" : 6076277503443625332,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

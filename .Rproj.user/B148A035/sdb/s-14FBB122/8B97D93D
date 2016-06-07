@@ -1,0 +1,18 @@
+{
+    "contents" : "Beta.sim <- function(n = 1337, a = 2.5, b = 5.5, initVal = 0.5){\n  B <- c(runif(1))\n  for(i in 2:n){\n    Y <- runif(1)\n    test <- min(dbeta(Y,a,b)/dbeta(B[i-1],a,b),1)\n    B[i] <- if(runif(1) < test){ Y }else{ B[i-1] }\n  }\n  return(B)\n}",
+    "created" : 1465305240908.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "3447847382",
+    "id" : "8B97D93D",
+    "lastKnownWriteTime" : 8030569511976331590,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
