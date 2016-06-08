@@ -63,7 +63,7 @@ linear.model <- function(formula){
 
   df <- height - width #degrees of freedom is generally the amount of data minus the amount of different parameters.
 
-  pval <- 1 - pf(Fstat,width-1,height-width-2) #To calculate the p-value, we use F-statistics, since we already have the Fstat.
+  pval <- 2*(1 - pf(Fstat,width-1,height-width-2)) #To calculate the p-value, we use F-statistics, since we already have the Fstat. Times 2 because of Two tails test.
 
   SS <- (1/(height - width - 2))*sum((residuals)^2) #Error variance, S^2. Page 135 top.
   SE <- as.vector(sqrt(diag(SS*solve(t(X)%*%X)))) #Standard Error. Page 134 Var(betahat|X), replace sigma^2 by SS. Note that Diag is used because all outliers are irrelevant. Book does not explain why
