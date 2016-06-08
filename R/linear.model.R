@@ -63,13 +63,13 @@ linear.model <- function(formula){
 
   df <- height - width #degrees of freedom is generally the amount of data minus the amount of different parameters.
 
-  pval <- 2*(1 - pf(Fstat,width-1,height-width-2)) #To calculate the p-value, we use F-statistics, since we already have the Fstat. Times 2 because of Two tails test.
+  pval <- 1 - pf(Fstat,width-1,height-width-2) #To calculate the p-value, we use F-statistics, since we already have the Fstat.
 
   SS <- (1/(height - width - 2))*sum((residuals)^2) #Error variance, S^2. Page 135 top.
   SE <- as.vector(sqrt(diag(SS*solve(t(X)%*%X)))) #Standard Error. Page 134 Var(betahat|X), replace sigma^2 by SS. Note that Diag is used because all outliers are irrelevant. Book does not explain why
   Tval <- bEst/SE #Page 135, middle. t-value, note that beta_i is 0, and so isnt in the equation
 
-  Pr <- 1-pt(abs(Tval),df) #Pr(>|t|) values. Calculated directly as it is described, using t distribution.
+  Pr <- 2*(1-pt(abs(Tval),df)) #Pr(>|t|) values. Calculated directly as it is described, using t distribution. 2 times because two tails test.
 
   #Making the table for residuals, based on how summary() would do it.
   res <- data.frame("Min" = min(residuals),"Q1"=quantile(residuals,0.25,names=FALSE), "Median" = median(residuals), "Q3"=quantile(residuals,0.75,names=FALSE), "Max" = max(residuals), row.names='')
