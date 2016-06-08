@@ -25,7 +25,7 @@ If \code{plot} is chosen to be TRUE, then the function plots the histogram, as w
 estimates.
 }
 \examples{
-bootstrap.correlation(n=2000,cars$speed,cars$dist, plot=TRUE )
+bootstrap.correlation(n=2000,cars$speed,cars$dist, plot=TRUE)
 }
 \author{
 Nguyen Khanh Le Ho & Emil H. Andersen \cr

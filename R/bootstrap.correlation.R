@@ -19,7 +19,7 @@
 #' \email{emila14@student.sdu.dk} \cr
 #' \email{ngho14@student.sdu.dk} \cr
 #' @examples
-#' bootstrap.correlation(n=2000,cars$speed,cars$dist, plot=TRUE )
+#' bootstrap.correlation(n=2000,cars$speed,cars$dist, plot=TRUE)
 
 
 bootstrap.correlation <- function(n = 200, x , y, plot = FALSE){
@@ -38,7 +38,7 @@ bootstrap.correlation <- function(n = 200, x , y, plot = FALSE){
   } else if(n < 1 || n != round(n)){ #checks if n is a natural number
     stop("'n' has to be a positive integer")
   }
-  if(is.list(y) || is.list(x) || !is.numeric(x) || !is.numeric(y) || is.matrix(x+y) || !is.vector(x+y)   ){
+  if(is.list(y) || is.list(x) || !is.numeric(x) || !is.numeric(y) || is.matrix(x+y) || !is.vector(x+y)){
     stop(" The given data 'x' or 'y' must be numerical vectors.")
   }
   if(length(x) != length(y)){ #We check if x and y has same length
